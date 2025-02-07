@@ -1,0 +1,17 @@
+export const SIGN_UP_COMPLETED = "project/users/signUpCompleted";
+export const ADD_PROFILE_PICTURE_COMPLETED = "project/users/addProfilePictureCompleted";
+export const LOGIN_COMPLETED = "project/users/loginCompleted";
+export const LOGOUT = "project/users/logout";
+export const UPDATE_PROFILE_COMPLETED = "project/users/updateProfileCompleted";
+export const UPDATE_USER_SETTINGS_COMPLETED = "project/users/updateUserSettingsCompleted";
+export const CHANGE_PASSWORD_COMPLETED = "project/users/changePasswordCompleted";
+export const SEND_VERIFICATION_CODE_COMPLETED = "project/users/sendVerificationCodeCompleted";
+export const ENTER_VERIFICATION_CODE_COMPLETED = "project/users/enterVerificationCodeCompleted";
+export const FIND_USER_FOLLOW_REQUESTS_COMPLETED = "project/users/findUserFollowRequestsCompleted";
+export const CLEAR_USER_FOLLOW_REQUESTS = "project/users/clearUserFollowRequests";
+export const GET_USER_NUM_FOLLOW_REQUESTS = "project/users/getUserNumFollowRequests";
+export const CLEAR_USER_NUM_FOLLOW_REQUESTS = "project/users/clearUserNumFollowRequests";
+export const ACCEPT_FOLLOW_REQUEST_COMPLETED = "project/users/acceptFollowRequestCompleted";
+export const REJECT_FOLLOW_REQUEST_COMPLETED = "project/users/rejectFollowRequestCompleted";
+export const DONT_SHOW_UPL_REWARD_COMPLETED = "project/users/dontShowUplRewardCompleted";
+export const DONT_SHOW_UPL_IMAGE_COMPLETED = "project/users/dontShowUplImageCompleted";
