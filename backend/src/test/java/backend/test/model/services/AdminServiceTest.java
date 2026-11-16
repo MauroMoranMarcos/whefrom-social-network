@@ -281,8 +281,6 @@ public class AdminServiceTest {
 
         Image image1 = imageService.uploadImage(
                 "title1", "description1", "location1", profilePicture, user1.getId());
-        Image image2 = imageService.uploadImage(
-                "title2", "description2", "location2", profilePicture, user1.getId());
         Image image3 = imageService.uploadImage(
                 "title3", "description3", "location3", profilePicture, user2.getId());
         Image image4 = imageService.uploadImage(
