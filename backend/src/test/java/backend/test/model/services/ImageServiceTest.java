@@ -879,15 +879,19 @@ public class ImageServiceTest {
             CategoryNotActiveException, InvalidBirthDateException, DuplicateInstanceException, InvalidLinkException,
             SilencedException {
 
-        User user = createUser("user1");
-        userService.signUp(user);
+        User user1 = createUser("user1");
+        userService.signUp(user1);
+        User user2 = createUser("user2");
+        userService.signUp(user2);
+        User user3 = createUser("user3");
+        userService.signUp(user3);
 
         Image image1 = imageService.uploadImage("mountain incredible", "description", "location",
-                imgFile, user.getId());
+                imgFile, user1.getId());
         Image image2 = imageService.uploadImage("amazing outfit", "description", "location",
-                imgFile, user.getId());
+                imgFile, user2.getId());
         Image image3 = imageService.uploadImage("incredible desk", "description", "location",
-                imgFile, user.getId());
+                imgFile, user3.getId());
 
         Category category1 = createCategory("Clothes");
         Category category2 = createCategory("Cars");
@@ -895,16 +899,16 @@ public class ImageServiceTest {
         categoryDao.save(category2);
 
         imageService.tagImage("Audi A8", "http://www.audi.com", 50, 50,
-                category2.getId(), image1.getId(), 0L, user.getId());
+                category2.getId(), image1.getId(), 0L, user1.getId());
         imageService.tagImage("Peugeot 308", "http://www.peugeot.com", 50, 50,
-                category2.getId(), image1.getId(), 0L, user.getId());
+                category2.getId(), image1.getId(), 0L, user1.getId());
         imageService.tagImage("Adidas shirt", "http://www.adidas.com", 50, 50,
-                category1.getId(), image1.getId(), 0L, user.getId());
+                category1.getId(), image1.getId(), 0L, user1.getId());
 
         imageService.tagImage("Nike shorts", "http://www.nike.com", 50, 50,
-                category1.getId(), image2.getId(), 0L, user.getId());
+                category1.getId(), image2.getId(), 0L, user2.getId());
         imageService.tagImage("Rebook shoes", "http://www.rebook.com", 50, 50,
-                category1.getId(), image2.getId(), 0L, user.getId());
+                category1.getId(), image2.getId(), 0L, user2.getId());
 
         Block<Image> expectedBlock1 = new Block<>(List.of(image1), false);
         Block<Image> expectedBlock2 = new Block<>(Arrays.asList(image2, image1), false);
@@ -914,7 +918,7 @@ public class ImageServiceTest {
         assertEquals(expectedBlock2, imageService.findImages(category1.getId(), "", 0, 2));
 
         Tag tag6 = imageService.tagImage("6ixty4our jersey", "http://www.6ixty4our.com", 50, 50,
-                category1.getId(), image3.getId(), 0L, user.getId());
+                category1.getId(), image3.getId(), 0L, user3.getId());
 
         assertEquals(expectedBlock3, imageService.findImages(category1.getId(), "", 0, 3));
 
