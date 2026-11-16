@@ -822,6 +822,7 @@ public class BrandServiceTest {
 
         User brand = createUser("brand");
         userService.signUp(brand);
+        brand.setVerified(true);
         User user = createNormalUser("user");
         userService.signUp(user);
         user.getUserPoints().setPoints(2000L);
