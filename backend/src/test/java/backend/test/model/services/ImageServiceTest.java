@@ -852,15 +852,19 @@ public class ImageServiceTest {
     public void testFindImagesByKeywords() throws InstanceNotFoundException, InvalidBirthDateException,
             DuplicateInstanceException, SilencedException, PermissionException {
 
-        User user = createUser("user1");
-        userService.signUp(user);
+        User user1 = createUser("user1");
+        userService.signUp(user1);
+        User user2 = createUser("user2");
+        userService.signUp(user2);
+        User user3 = createUser("user3");
+        userService.signUp(user3);
 
         Image image1 = imageService.uploadImage("mountain incredible", "description", "location",
-                imgFile, user.getId());
+                imgFile, user1.getId());
         Image image2 = imageService.uploadImage("mountain amazing", "description", "location",
-                imgFile, user.getId());
+                imgFile, user2.getId());
         Image image3 = imageService.uploadImage("amazing outfit", "description", "location",
-                imgFile, user.getId());
+                imgFile, user3.getId());
 
         Block<Image> expectedBlock1 = new Block<>(Arrays.asList(image2, image1), false);
         Block<Image> expectedBlock2 = new Block<>(Arrays.asList(image3, image2), false);
