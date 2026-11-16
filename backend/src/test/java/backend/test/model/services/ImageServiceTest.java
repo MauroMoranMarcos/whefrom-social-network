@@ -928,26 +928,30 @@ public class ImageServiceTest {
     public void testFindImages() throws PermissionException, InstanceNotFoundException, CategoryNotActiveException,
             InvalidBirthDateException, DuplicateInstanceException, InvalidLinkException, SilencedException {
 
-        User user = createUser("user1");
-        userService.signUp(user);
+        User user1 = createUser("user1");
+        userService.signUp(user1);
+        User user2 = createUser("user2");
+        userService.signUp(user2);
+        User user3 = createUser("user3");
+        userService.signUp(user3);
 
         Image image1 = imageService.uploadImage("mountain incredible", "description", "location",
-                imgFile, user.getId());
+                imgFile, user1.getId());
         Image image2 = imageService.uploadImage("incredible outfit", "description", "location",
-                imgFile, user.getId());
+                imgFile, user2.getId());
         imageService.uploadImage("incredible desk", "description", "location",
-                imgFile, user.getId());
+                imgFile, user3.getId());
 
         Category category1 = createCategory("Clothes");
         categoryDao.save(category1);
 
         imageService.tagImage("Adidas shirt", "http://www.adidas.com", 50, 50,
-                category1.getId(), image1.getId(), 0L, user.getId());
+                category1.getId(), image1.getId(), 0L, user1.getId());
 
         imageService.tagImage("Nike shorts", "http://www.nike.com", 50, 50,
-                category1.getId(), image2.getId(), 0L, user.getId());
+                category1.getId(), image2.getId(), 0L, user2.getId());
         imageService.tagImage("Rebook shoes", "http://www.rebook.com", 50, 50,
-                category1.getId(), image2.getId(), 0L, user.getId());
+                category1.getId(), image2.getId(), 0L, user2.getId());
 
         Block<Image> expectedBlock = new Block<>(Arrays.asList(image2, image1), false);
 
