@@ -1106,8 +1106,14 @@ public class BrandServiceTest {
 
         Image image1 = imageService.uploadImage(
                 "title1", "description1", "location1", imgFile, user.getId());
+
+        user.getUserPoints().setPublishedToday(false);
+
         Image image2 = imageService.uploadImage(
                 "title2", "description2", "location2", imgFile, user.getId());
+
+        user.getUserPoints().setPublishedToday(false);
+
         Image image3 = imageService.uploadImage(
                 "title3", "description3", "location3", imgFile, user.getId());
 
