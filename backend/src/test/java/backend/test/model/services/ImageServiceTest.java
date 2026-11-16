@@ -969,13 +969,15 @@ public class ImageServiceTest {
         user1.getUserSettings().setPrivacyPublic(false);
         User user2 = createUser("user2");
         userService.signUp(user2);
+        User user3 = createUser("user3");
+        userService.signUp(user3);
 
         Image image1 = imageService.uploadImage("mountain incredible", "description", "location",
                 imgFile, user1.getId());
         Image image2 = imageService.uploadImage("incredible outfit", "description", "location",
                 imgFile, user2.getId());
         imageService.uploadImage("incredible desk", "description", "location",
-                imgFile, user2.getId());
+                imgFile, user3.getId());
 
         Category category1 = createCategory("Clothes");
         categoryDao.save(category1);
