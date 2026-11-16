@@ -138,7 +138,7 @@ public class BrandServiceTest {
             BrandNotVerifiedException {
 
         User brand = createUser("brand");
-
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description",
@@ -184,6 +184,7 @@ public class BrandServiceTest {
     public void testUploadRewardWithInvalidEndDate() {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         assertThrows(InvalidEndDateException.class, () ->
@@ -197,7 +198,7 @@ public class BrandServiceTest {
             InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
-
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -228,7 +229,7 @@ public class BrandServiceTest {
             InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
-
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -243,6 +244,7 @@ public class BrandServiceTest {
             InvalidEndDateException, BrandNotVerifiedException {
 
         User brand1 = createUser("brand1");
+        brand1.setVerified(true);
         userDao.save(brand1);
         User brand2 = createUser("brand2");
         userDao.save(brand2);
@@ -260,6 +262,7 @@ public class BrandServiceTest {
             RewardAlreadyHiddenException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -277,6 +280,7 @@ public class BrandServiceTest {
             InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -294,6 +298,7 @@ public class BrandServiceTest {
             RewardNotHiddenException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -327,6 +332,7 @@ public class BrandServiceTest {
             RewardAlreadyHiddenException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -343,6 +349,7 @@ public class BrandServiceTest {
             RewardAlreadyHiddenException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand1 = createUser("brand1");
+        brand1.setVerified(true);
         userDao.save(brand1);
         User brand2 = createUser("brand2");
         userDao.save(brand2);
@@ -361,6 +368,7 @@ public class BrandServiceTest {
     public void testShowRewardNotHidden() throws InstanceNotFoundException, PermissionException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -376,6 +384,7 @@ public class BrandServiceTest {
             RewardAlreadyHiddenException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -395,6 +404,7 @@ public class BrandServiceTest {
             BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -422,6 +432,7 @@ public class BrandServiceTest {
             InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -437,6 +448,7 @@ public class BrandServiceTest {
             InvalidEndDateException, BrandNotVerifiedException {
 
         User brand1 = createUser("brand1");
+        brand1.setVerified(true);
         userDao.save(brand1);
         User brand2 = createUser("brand2");
         userDao.save(brand2);
@@ -454,6 +466,7 @@ public class BrandServiceTest {
             InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -471,6 +484,7 @@ public class BrandServiceTest {
             InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -492,6 +506,7 @@ public class BrandServiceTest {
             RewardAlreadyHiddenException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -509,6 +524,7 @@ public class BrandServiceTest {
             RewardAlreadyHiddenException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         User user = createUser("user");
@@ -530,6 +546,7 @@ public class BrandServiceTest {
             HiddenRewardException, RewardAlreadyHiddenException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userDao.save(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -547,8 +564,10 @@ public class BrandServiceTest {
             RewardNotClaimableException, IOException, HiddenImageException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand1 = createUser("brand1");
+        brand1.setVerified(true);
         userDao.save(brand1);
         User brand2 = createUser("brand2");
+        brand2.setVerified(true);
         userDao.save(brand2);
         User user = createNormalUser("user");
         userService.signUp(user);
@@ -607,8 +626,10 @@ public class BrandServiceTest {
             RewardNotClaimableException, IOException, HiddenImageException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand1 = createUser("brand1");
+        brand1.setVerified(true);
         userDao.save(brand1);
         User brand2 = createUser("brand2");
+        brand2.setVerified(true);
         userDao.save(brand2);
         User user = createNormalUser("user");
         userService.signUp(user);
@@ -655,8 +676,10 @@ public class BrandServiceTest {
             RewardAlreadyHiddenException, InvalidEndDateException, HiddenImageException, BrandNotVerifiedException {
 
         User brand1 = createUser("brand1");
+        brand1.setVerified(true);
         userDao.save(brand1);
         User brand2 = createUser("brand2");
+        brand2.setVerified(true);
         userDao.save(brand2);
 
         Reward reward1 = brandService.uploadReward("name1", "description1", LocalDate.now().plusYears(1),
@@ -734,6 +757,7 @@ public class BrandServiceTest {
             HiddenImageException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user = createNormalUser("user");
         userService.signUp(user);
@@ -757,6 +781,7 @@ public class BrandServiceTest {
             InvalidBirthDateException, DuplicateInstanceException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -783,6 +808,7 @@ public class BrandServiceTest {
             InvalidBirthDateException, DuplicateInstanceException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user = createNormalUser("user");
         userService.signUp(user);
@@ -802,6 +828,7 @@ public class BrandServiceTest {
 
         User brand = createUser("brand");
         userService.signUp(brand);
+        brand.setVerified(true);
         User user = createNormalUser("user");
         userService.signUp(user);
         user.getUserPoints().setPoints(2000L);
@@ -821,6 +848,7 @@ public class BrandServiceTest {
 
         User brand = createUser("brand");
         userService.signUp(brand);
+        brand.setVerified(true);
         User user = createNormalUser("user");
         userService.signUp(user);
         user.getUserPoints().setPoints(2000L);
@@ -841,6 +869,7 @@ public class BrandServiceTest {
             DuplicateInstanceException, IOException, HiddenImageException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user = createNormalUser("user");
         userService.signUp(user);
@@ -863,16 +892,19 @@ public class BrandServiceTest {
             InvalidLinkException, InvalidEndDateException, SilencedException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user = createNormalUser("user");
         userService.signUp(user);
-        user.getUserPoints().setPoints(2000L);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
                 1000L, 2L, 50L, imgFile, brand.getId());
 
         Image image1 = imageService.uploadImage("title1", "description1", "location1", imgFile,
                 user.getId());
+
+        user.getUserPoints().setPublishedToday(false);
+
         Image image2 = imageService.uploadImage("title2", "description2", "location2", imgFile,
                 user.getId());
 
@@ -888,6 +920,8 @@ public class BrandServiceTest {
 
         assertFalse(rewardClaimedDao.existsByUserAndReward(user, reward));
 
+        user.getUserPoints().setPoints(2000L);
+
         brandService.claimReward(user.getId(), reward.getId());
 
         assertEquals(1000L, user.getUserPoints().getPoints());
@@ -902,6 +936,7 @@ public class BrandServiceTest {
             InvalidEndDateException, SilencedException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user = createNormalUser("user");
         userService.signUp(user);
@@ -930,6 +965,7 @@ public class BrandServiceTest {
             RewardNotClaimableException, IOException, InvalidEndDateException, InterruptedException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user = createNormalUser("user");
         userService.signUp(user);
@@ -956,6 +992,7 @@ public class BrandServiceTest {
             DuplicateInstanceException, IOException, HiddenImageException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user = createNormalUser("user");
         userService.signUp(user);
@@ -977,6 +1014,7 @@ public class BrandServiceTest {
             InvalidBirthDateException, DuplicateInstanceException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -1005,6 +1043,7 @@ public class BrandServiceTest {
             IOException, HiddenImageException, InvalidEndDateException, BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user1 = createNormalUser("user1");
         userService.signUp(user1);
@@ -1048,6 +1087,7 @@ public class BrandServiceTest {
             BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
 
         Reward reward = brandService.uploadReward("name", "description", LocalDate.now().plusYears(1),
@@ -1076,6 +1116,7 @@ public class BrandServiceTest {
             BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user1 = createNormalUser("user1");
         userService.signUp(user1);
@@ -1104,8 +1145,14 @@ public class BrandServiceTest {
 
         Image image1 = imageService.uploadImage(
                 "title1", "description1", "location1", imgFile, user.getId());
+
+        user.getUserPoints().setPublishedToday(false);
+
         Image image2 = imageService.uploadImage(
                 "title2", "description2", "location2", imgFile, user.getId());
+
+        user.getUserPoints().setPublishedToday(false);
+
         Image image3 = imageService.uploadImage(
                 "title3", "description3", "location3", imgFile, user.getId());
 
