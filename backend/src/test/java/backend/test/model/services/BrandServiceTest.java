@@ -1078,6 +1078,7 @@ public class BrandServiceTest {
             BrandNotVerifiedException {
 
         User brand = createUser("brand");
+        brand.setVerified(true);
         userService.signUp(brand);
         User user1 = createNormalUser("user1");
         userService.signUp(user1);
