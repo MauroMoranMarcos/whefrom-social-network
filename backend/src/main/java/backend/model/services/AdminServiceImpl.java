@@ -587,7 +587,7 @@ public class AdminServiceImpl implements AdminService {
 
         User brand = permissionChecker.checkUser(brandId);
 
-        if (!Objects.equals(brand.getRole(), User.RoleType.BRAND_USER)) {
+        if (!isBrand(brand.getRole())) {
             throw new PermissionException();
         }
 
@@ -618,7 +618,7 @@ public class AdminServiceImpl implements AdminService {
 
         User brand = permissionChecker.checkUser(brandId);
 
-        if (!Objects.equals(brand.getRole(), User.RoleType.BRAND_USER)) {
+        if (!isBrand(brand.getRole())) {
             throw new PermissionException();
         }
 
@@ -649,7 +649,7 @@ public class AdminServiceImpl implements AdminService {
 
         User brand = permissionChecker.checkUser(brandId);
 
-        if (!Objects.equals(brand.getRole(), User.RoleType.BRAND_USER)) {
+        if (!isBrand(brand.getRole())) {
             throw new PermissionException();
         }
 
@@ -726,6 +726,10 @@ public class AdminServiceImpl implements AdminService {
 
     private boolean isAdmin(User.RoleType role) {
         return Objects.equals(role, User.RoleType.ADMIN_USER);
+    }
+
+    private boolean isBrand(User.RoleType role) {
+        return Objects.equals(role, User.RoleType.BRAND_USER);
     }
 
 }
