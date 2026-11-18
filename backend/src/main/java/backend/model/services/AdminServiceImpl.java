@@ -136,7 +136,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userId);
 
-        if (!admin.getRole().equals(User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -169,7 +169,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -185,7 +185,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -205,7 +205,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -221,7 +221,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -241,7 +241,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -275,7 +275,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -310,7 +310,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -336,7 +336,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -362,7 +362,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -388,7 +388,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -414,7 +414,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -441,7 +441,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -469,7 +469,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -484,7 +484,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -504,7 +504,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -524,7 +524,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -544,7 +544,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -565,7 +565,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -581,7 +581,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -612,7 +612,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -643,7 +643,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -664,7 +664,7 @@ public class AdminServiceImpl implements AdminService {
         Iterable<User> users = userDao.findAll();
 
         for (User user : users) {
-            if (user.getRole().equals(User.RoleType.NORMAL_USER) || user.getRole().equals(User.RoleType.BRAND_USER)) {
+            if (!isAdmin(user.getRole())) {
                 UserPoints userPoints = user.getUserPoints();
 
                 Random random = new Random();
@@ -722,6 +722,10 @@ public class AdminServiceImpl implements AdminService {
 
         mailSender.send(mailMessage);
 
+    }
+
+    private boolean isAdmin(User.RoleType role) {
+        return Objects.equals(role, User.RoleType.ADMIN_USER);
     }
 
 }
