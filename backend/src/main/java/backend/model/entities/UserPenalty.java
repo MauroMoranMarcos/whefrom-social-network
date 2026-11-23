@@ -15,13 +15,6 @@ public class UserPenalty {
     public UserPenalty() {
     }
 
-    public UserPenalty(Long id, LocalDate silencedUntil, LocalDate blockedUntil, User user) {
-        this.id = id;
-        this.silencedUntil = silencedUntil;
-        this.blockedUntil = blockedUntil;
-        this.user = user;
-    }
-
     public UserPenalty(LocalDate silencedUntil, LocalDate blockedUntil, User user) {
         this.silencedUntil = silencedUntil;
         this.blockedUntil = blockedUntil;
@@ -48,7 +41,11 @@ public class UserPenalty {
         return silencedUntil;
     }
 
-    public void setSilencedUntil(LocalDate silencedUntil) {
+    private void setSilencedUntil(LocalDate silencedUntil) {
+        this.silencedUntil = silencedUntil;
+    }
+
+    public void silenceUntil(LocalDate silencedUntil) {
         this.silencedUntil = silencedUntil;
     }
 
@@ -56,7 +53,11 @@ public class UserPenalty {
         return blockedUntil;
     }
 
-    public void setBlockedUntil(LocalDate blockedUntil) {
+    private void setBlockedUntil(LocalDate blockedUntil) {
+        this.blockedUntil = blockedUntil;
+    }
+
+    public void blockUntil(LocalDate blockedUntil) {
         this.blockedUntil = blockedUntil;
     }
 
