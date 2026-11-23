@@ -146,7 +146,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> user = userDao.findById(userId);
 
         if (user.isPresent()) {
-            user.get().setProfilePicture(image);
+            user.get().updateUser(image);
         }
 
     }
@@ -157,11 +157,7 @@ public class UserServiceImpl implements UserService {
 
         User user = permissionChecker.checkUser(id);
 
-        user.setName(firstName);
-        user.setSurname(lastName);
-        user.setEmail(email);
-        user.setPhoneNumber(phoneNumber);
-        user.setAbout(about);
+        user.updateUser(firstName, lastName, email, phoneNumber, about);
 
         return user;
 
