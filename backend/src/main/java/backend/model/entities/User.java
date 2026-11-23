@@ -336,8 +336,16 @@ public class User {
         return verified;
     }
 
-    public void setVerified(Boolean verified) {
+    private void setVerified(Boolean verified) {
         this.verified = verified;
+    }
+
+    public void verify() {
+        this.verified = true;
+    }
+
+    public void unverify() {
+        this.verified = false;
     }
 
     public RoleType getRole() {
