@@ -650,17 +650,21 @@ public class AdminServiceImpl implements AdminService {
 
         for (User user : users) {
             if (user.getUserSettings().getNotifyMe()) {
-                LocalDateTime now = LocalDateTime.now();
                 UserPoints userPoints = user.getUserPoints();
-                LocalDateTime publicationTime = userPoints.getPublicationTime();
 
-                if (!userPoints.getPublishedToday() && publicationTime.getHour() == now.getHour() &&
-                        publicationTime.getMinute() == now.getMinute()) {
-
+                if (canUserPublish(userPoints)) {
                     sendEmailToPublishToday(user.getEmail());
                 }
             }
         }
+    }
+
+    private boolean canUserPublish(UserPoints userPoints) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime publicationTime = userPoints.getPublicationTime();
+
+        return !userPoints.getPublishedToday() && publicationTime.getHour() == now.getHour() &&
+                publicationTime.getMinute() == now.getMinute();
     }
 
     private void sendEmailToPublishToday(String to) throws IOException {
