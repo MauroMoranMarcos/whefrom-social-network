@@ -43,6 +43,18 @@ public class User {
         this.password = password;
     }
 
+    public void updateUser(String firstName, String lastName, String email, String phoneNumber, String about) {
+        this.name = firstName;
+        this.surname = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.about = about;
+    }
+
+    public void updateUser(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
     /*
     Constructor to create a new object User with all attributes (Normal/Brand User with all info).
      */
@@ -239,7 +251,7 @@ public class User {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    private void setUserName(String userName) {
         this.userName = userName;
     }
 
@@ -259,7 +271,7 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
@@ -267,7 +279,7 @@ public class User {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    private void setSurname(String surname) {
         this.surname = surname;
     }
 
@@ -275,7 +287,7 @@ public class User {
         return about;
     }
 
-    public void setAbout(String about) {
+    private void setAbout(String about) {
         this.about = about;
     }
 
@@ -283,7 +295,7 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) {
+    private void setEmail(String email) {
         this.email = email;
     }
 
@@ -291,7 +303,7 @@ public class User {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    private void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -299,7 +311,7 @@ public class User {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    private void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -307,7 +319,7 @@ public class User {
         return profilePicture;
     }
 
-    public void setProfilePicture(byte[] profilePicture) {
+    private void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 
