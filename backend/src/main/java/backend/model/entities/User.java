@@ -36,6 +36,13 @@ public class User {
 
     public User() {}
 
+    public void initUser(UserSettings userSettings, UserPoints userPoints, UserPenalty userPenalty, String password) {
+        this.userSettings = userSettings;
+        this.userPoints = userPoints;
+        this.userPenalty = userPenalty;
+        this.password = password;
+    }
+
     /*
     Constructor to create a new object User with all attributes (Normal/Brand User with all info).
      */
@@ -240,7 +247,7 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
 
