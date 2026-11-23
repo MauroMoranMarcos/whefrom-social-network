@@ -399,7 +399,7 @@ public class AdminServiceImpl implements AdminService {
             throw new ReportAlreadyResolvedException();
         }
 
-        userReport.setResolved(true);
+        userReport.resolve();
 
         return userReport.getResolved();
 
