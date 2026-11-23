@@ -380,7 +380,7 @@ public class User {
         return userSettings;
     }
 
-    public void setUserSettings(UserSettings userSettings) {
+    private void setUserSettings(UserSettings userSettings) {
         this.userSettings = userSettings;
     }
 
@@ -389,7 +389,7 @@ public class User {
         return userPoints;
     }
 
-    public void setUserPoints(UserPoints userPoints) {
+    private void setUserPoints(UserPoints userPoints) {
         this.userPoints = userPoints;
     }
 
@@ -398,7 +398,7 @@ public class User {
         return userPenalty;
     }
 
-    public void setUserPenalty(UserPenalty userPenalty) {
+    private void setUserPenalty(UserPenalty userPenalty) {
         this.userPenalty = userPenalty;
     }
 
