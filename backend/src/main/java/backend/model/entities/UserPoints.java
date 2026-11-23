@@ -17,26 +17,15 @@ public class UserPoints {
     public UserPoints() {
     }
 
-    public UserPoints(Long id, Long points, LocalDateTime publicationTime, Boolean publishedToday, User user) {
-        this.id = id;
-        this.points = points;
-        this.publicationTime = publicationTime;
-        this.publishedToday = publishedToday;
-        this.user = user;
+    public static UserPoints createNew(User user) {
+        return new UserPoints(user);
     }
 
-    public UserPoints(Long points, LocalDateTime publicationTime, Boolean publishedToday, User user) {
-        this.points = points;
-        this.publicationTime = publicationTime;
-        this.publishedToday = publishedToday;
+    private UserPoints(User user) {
         this.user = user;
-    }
-
-    public UserPoints(Long id, Long points, LocalDateTime publicationTime, Boolean publishedToday) {
-        this.id = id;
-        this.points = points;
-        this.publicationTime = publicationTime;
-        this.publishedToday = publishedToday;
+        this.points = 0L;
+        this.publicationTime = LocalDateTime.now();
+        this.publishedToday = false;
     }
 
     @Id
