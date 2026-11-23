@@ -617,7 +617,6 @@ public class AdminServiceImpl implements AdminService {
                 UserPoints userPoints = user.getUserPoints();
 
                 userPoints.resetPublicationTime();
-                userPoints.resetPublishedToday();
             }
         }
 
