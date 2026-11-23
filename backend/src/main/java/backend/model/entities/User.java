@@ -304,8 +304,16 @@ public class User {
         return silenced;
     }
 
-    public void setSilenced(Boolean silenced) {
+    private void setSilenced(Boolean silenced) {
         this.silenced = silenced;
+    }
+
+    public void silence() {
+        this.silenced = true;
+    }
+
+    public void unsilence() {
+        this.silenced = false;
     }
 
     public Boolean getBlocked() {
