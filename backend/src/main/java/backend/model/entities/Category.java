@@ -15,8 +15,29 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name) {
+    private Category(String name, boolean active) {
         this.name = name;
+        this.active = active;
+    }
+
+    public static Category createNew(String name) {
+        return new Category(name, true);
+    }
+
+    public static Category createNew(String name, Boolean active) {
+        return new Category(name, active != null ? active : true);
+    }
+
+    public void updateCategory(String name, Boolean active) {
+        this.name = name;
+        this.active = active;
+    }
+
+    public void deactivate() {
+        this.active = false;
+    }
+
+    public void activate() {
         this.active = true;
     }
 
@@ -26,7 +47,7 @@ public class Category {
         return id;
     }
 
-    public void setId(Long id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
@@ -34,7 +55,7 @@ public class Category {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
@@ -42,7 +63,7 @@ public class Category {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    private void setActive(Boolean active) {
         this.active = active;
     }
 }
