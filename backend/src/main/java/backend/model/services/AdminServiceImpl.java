@@ -451,9 +451,6 @@ public class AdminServiceImpl implements AdminService {
 
         User user = permissionChecker.checkUser(userId);
 
-        UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
-
-        userPenalty.resetSilence();
         user.unsilence();
 
         return user.getSilenced();
@@ -471,9 +468,6 @@ public class AdminServiceImpl implements AdminService {
 
         User user = permissionChecker.checkUser(userId);
 
-        UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
-
-        userPenalty.resetBlock();
         user.unblock();
 
         return user.getSilenced();
