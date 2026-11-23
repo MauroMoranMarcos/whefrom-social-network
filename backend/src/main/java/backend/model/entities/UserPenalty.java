@@ -15,16 +15,14 @@ public class UserPenalty {
     public UserPenalty() {
     }
 
-    public UserPenalty(LocalDate silencedUntil, LocalDate blockedUntil, User user) {
-        this.silencedUntil = silencedUntil;
-        this.blockedUntil = blockedUntil;
-        this.user = user;
+    public static UserPenalty createNew(User user) {
+        return new UserPenalty(user);
     }
 
-    public UserPenalty(Long id, LocalDate silencedUntil, LocalDate blockedUntil) {
-        this.id = id;
-        this.silencedUntil = silencedUntil;
-        this.blockedUntil = blockedUntil;
+    private UserPenalty(User user) {
+        this.user = user;
+        this.silencedUntil = LocalDate.now().minusYears(1);
+        this.blockedUntil = LocalDate.now().minusYears(1);
     }
 
     @Id
