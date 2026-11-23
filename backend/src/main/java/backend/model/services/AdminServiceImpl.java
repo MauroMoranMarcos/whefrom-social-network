@@ -61,11 +61,7 @@ public class AdminServiceImpl implements AdminService {
             throw new DuplicateInstanceException("project.entities.category", name);
         }
 
-        Category category = new Category(name);
-
-        if (active != null) {
-            category.setActive(active);
-        }
+        Category category = Category.createNew(name, active);
 
         categoryDao.save(category);
 
@@ -108,8 +104,7 @@ public class AdminServiceImpl implements AdminService {
 
         Category category = categoryopt.get();
 
-        category.setName(name);
-        category.setActive(status);
+        category.updateCategory(name, status);
 
         return category;
 
