@@ -318,7 +318,7 @@ public class AdminServiceImpl implements AdminService {
         User userReported = userReportOpt.get().getUserReported();
         UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.setSilenced(true);
+        userReported.silence();
         userPenalty.setSilencedUntil(silencedUntil);
 
         return userReported.getSilenced();
@@ -344,7 +344,7 @@ public class AdminServiceImpl implements AdminService {
         User userReported = imageReportOpt.get().getImageReported().getUser();
         UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.setSilenced(true);
+        userReported.silence();
         userPenalty.setSilencedUntil(silencedUntil);
 
         return userReported.getSilenced();
@@ -488,7 +488,7 @@ public class AdminServiceImpl implements AdminService {
         UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
 
         userPenalty.setSilencedUntil(LocalDate.now().minusYears(1));
-        user.setSilenced(false);
+        user.unsilence();
 
         return user.getSilenced();
 
@@ -527,7 +527,7 @@ public class AdminServiceImpl implements AdminService {
 
         UserPenalty userPenalty = user.getUserPenalty();
 
-        user.setSilenced(true);
+        user.silence();
         userPenalty.setSilencedUntil(silencedUntil);
 
         return user.getSilenced();
