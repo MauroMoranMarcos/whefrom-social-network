@@ -57,7 +57,7 @@ public class AdminServiceTest {
     private final byte[] profilePicture = new byte[] {0x12, 0x34, 0x56, 0x78};
 
     private Category createCategory(String name) {
-        return new Category(name);
+        return Category.createNew(name);
     }
 
     private User createAdmin(String userName) {
@@ -120,7 +120,7 @@ public class AdminServiceTest {
         Category category2 = createCategory("category2");
         Category category3 = createCategory("category3");
 
-        category1.setActive(false);
+        category1.deactivate();
 
         categoryDao.save(category1);
         categoryDao.save(category3);
@@ -139,7 +139,7 @@ public class AdminServiceTest {
         Category category2 = createCategory("category2");
         Category category3 = createCategory("category3");
 
-        category1.setActive(false);
+        category1.deactivate();
 
         categoryDao.save(category1);
         categoryDao.save(category3);

@@ -69,7 +69,7 @@ public class BrandServiceTest {
     }
 
     private Category createCategory(String categoryName) {
-        return new Category(categoryName);
+        return Category.createNew(categoryName);
     }
 
     @Test
