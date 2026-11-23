@@ -78,11 +78,11 @@ public class UserServiceImpl implements UserService {
             throw new InvalidBirthDateException();
         }
 
-        UserSettings userSettings = new UserSettings(user);
+        UserSettings userSettings = UserSettings.createNew(user);
 
-        UserPoints userPoints = new UserPoints(0L, LocalDateTime.now(), false, user);
+        UserPoints userPoints = UserPoints.createNew(user);
 
-        UserPenalty userPenalty = new UserPenalty(LocalDate.now().minusYears(1), LocalDate.now().minusYears(1), user);
+        UserPenalty userPenalty = UserPenalty.createNew(user);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
