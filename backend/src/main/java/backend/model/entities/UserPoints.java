@@ -86,6 +86,7 @@ public class UserPoints {
         // Crear el LocalDateTime con la fecha actual y la hora generada aleatoriamente
         this.publicationTime = LocalDateTime.of(LocalDate.now(),
                 java.time.LocalTime.of(hour, minute, second));
+        this.publishedToday = false;
     }
 
     public void resetPublishedToday() {
