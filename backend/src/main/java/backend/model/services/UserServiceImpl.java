@@ -176,7 +176,7 @@ public class UserServiceImpl implements UserService {
         if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
             throw new IncorrectPasswordException();
         } else {
-            user.setPassword(passwordEncoder.encode(newPassword));
+            user.changePassword(passwordEncoder.encode(newPassword));
         }
 
     }
@@ -197,7 +197,7 @@ public class UserServiceImpl implements UserService {
             throw new PermissionException();
         }
 
-        user.setPassword(passwordEncoder.encode(newPassword));
+        user.changePassword(passwordEncoder.encode(newPassword));
 
         user.setVerificationCode("");
 
