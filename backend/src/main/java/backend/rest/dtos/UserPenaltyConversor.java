@@ -12,10 +12,4 @@ public class UserPenaltyConversor {
         return new UserPenaltyDto(userPenalty.getId(), userPenalty.getSilencedUntil(), userPenalty.getBlockedUntil());
 
     }
-
-    public final static UserPenalty toUserPenalty(UserPenaltyDto userPenaltyDto) {
-
-        return new UserPenalty(userPenaltyDto.getId(), userPenaltyDto.getSilencedUntil(), userPenaltyDto.getBlockedUntil());
-
-    }
 }

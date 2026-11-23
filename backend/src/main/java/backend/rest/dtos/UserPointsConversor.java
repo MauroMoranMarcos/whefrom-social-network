@@ -12,10 +12,4 @@ public class UserPointsConversor {
                 userPoints.getPublishedToday());
     }
 
-    public final static UserPoints toUserPoints(UserPointsDto userPointsDto) {
-
-        return new UserPoints(userPointsDto.getId(), userPointsDto.getPoints(),
-                userPointsDto.getPublicationTime(), userPointsDto.getPublishedToday());
-    }
-
 }

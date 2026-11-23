@@ -11,10 +11,4 @@ public class UserSettingsConversor {
                 userSettings.getShowUplRewardHelp(), userSettings.getShowUplImageHelp());
     }
 
-    public final static UserSettings toUserSettings(UserSettingsDto userSettingsDto) {
-
-        return new UserSettings(userSettingsDto.getId(), userSettingsDto.getPrivacyPublic(),
-                userSettingsDto.getNotifyMe(), userSettingsDto.getShowUplRewardHelp(), userSettingsDto.getShowUplImageHelp());
-    }
-
 }
