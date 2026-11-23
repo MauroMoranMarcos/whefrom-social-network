@@ -320,8 +320,16 @@ public class User {
         return blocked;
     }
 
-    public void setBlocked(Boolean blocked) {
+    private void setBlocked(Boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public void block() {
+        this.blocked = true;
+    }
+
+    public void unblock() {
+        this.blocked = false;
     }
 
     public Boolean getVerified() {
