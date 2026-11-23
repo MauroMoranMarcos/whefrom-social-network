@@ -461,7 +461,7 @@ public class AdminServiceImpl implements AdminService {
 
         UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
 
-        userPenalty.silenceUntil(LocalDate.now().minusYears(1));
+        userPenalty.resetSilence();
         user.unsilence();
 
         return user.getSilenced();
@@ -481,7 +481,7 @@ public class AdminServiceImpl implements AdminService {
 
         UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
 
-        userPenalty.blockUntil(LocalDate.now().minusYears(1));
+        userPenalty.resetBlock();
         user.unblock();
 
         return user.getSilenced();
