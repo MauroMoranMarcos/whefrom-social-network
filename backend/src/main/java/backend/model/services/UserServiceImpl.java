@@ -84,11 +84,7 @@ public class UserServiceImpl implements UserService {
 
         UserPenalty userPenalty = UserPenalty.createNew(user);
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        user.setUserSettings(userSettings);
-        user.setUserPoints(userPoints);
-        user.setUserPenalty(userPenalty);
+        user.initUser(userSettings, userPoints, userPenalty, passwordEncoder.encode(user.getPassword()));
 
         userDao.save(user);
         userSettingsDao.save(userSettings);
