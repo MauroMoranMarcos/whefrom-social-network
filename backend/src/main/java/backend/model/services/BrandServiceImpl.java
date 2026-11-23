@@ -64,9 +64,9 @@ public class BrandServiceImpl implements BrandService {
             throw new DuplicateInstanceException("project.entities.user", user.getUserName());
         }
 
-        UserSettings userSettings = new UserSettings(user);
+        UserSettings userSettings = UserSettings.createNew(user);
 
-        UserPenalty userPenalty = new UserPenalty(LocalDate.now().minusYears(1), LocalDate.now().minusYears(1), user);
+        UserPenalty userPenalty = UserPenalty.createNew(user);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(User.RoleType.BRAND_USER);
