@@ -426,7 +426,7 @@ public class AdminServiceImpl implements AdminService {
             throw new ReportAlreadyResolvedException();
         }
 
-        imageReport.setResolved(true);
+        imageReport.resolve();
 
         return imageReport.getResolved();
 
