@@ -319,7 +319,7 @@ public class AdminServiceImpl implements AdminService {
         UserPenalty userPenalty = userReported.getUserPenalty();
 
         userReported.silence();
-        userPenalty.setSilencedUntil(silencedUntil);
+        userPenalty.silenceUntil(silencedUntil);
 
         return userReported.getSilenced();
 
@@ -345,7 +345,7 @@ public class AdminServiceImpl implements AdminService {
         UserPenalty userPenalty = userReported.getUserPenalty();
 
         userReported.silence();
-        userPenalty.setSilencedUntil(silencedUntil);
+        userPenalty.silenceUntil(silencedUntil);
 
         return userReported.getSilenced();
 
@@ -371,7 +371,7 @@ public class AdminServiceImpl implements AdminService {
         UserPenalty userPenalty = userReported.getUserPenalty();
 
         userReported.setBlocked(true);
-        userPenalty.setBlockedUntil(blockedUntil);
+        userPenalty.blockUntil(blockedUntil);
 
         return userReported.getBlocked();
 
@@ -397,7 +397,7 @@ public class AdminServiceImpl implements AdminService {
         UserPenalty userPenalty = userReported.getUserPenalty();
 
         userReported.setBlocked(true);
-        userPenalty.setBlockedUntil(blockedUntil);
+        userPenalty.blockUntil(blockedUntil);
 
         return userReported.getBlocked();
 
@@ -487,7 +487,7 @@ public class AdminServiceImpl implements AdminService {
 
         UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
 
-        userPenalty.setSilencedUntil(LocalDate.now().minusYears(1));
+        userPenalty.silenceUntil(LocalDate.now().minusYears(1));
         user.unsilence();
 
         return user.getSilenced();
@@ -507,7 +507,7 @@ public class AdminServiceImpl implements AdminService {
 
         UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
 
-        userPenalty.setBlockedUntil(LocalDate.now().minusYears(1));
+        userPenalty.blockUntil(LocalDate.now().minusYears(1));
         user.setBlocked(false);
 
         return user.getSilenced();
@@ -528,7 +528,7 @@ public class AdminServiceImpl implements AdminService {
         UserPenalty userPenalty = user.getUserPenalty();
 
         user.silence();
-        userPenalty.setSilencedUntil(silencedUntil);
+        userPenalty.silenceUntil(silencedUntil);
 
         return user.getSilenced();
 
@@ -548,7 +548,7 @@ public class AdminServiceImpl implements AdminService {
         UserPenalty userPenalty = user.getUserPenalty();
 
         user.setBlocked(true);
-        userPenalty.setBlockedUntil(blockedUntil);
+        userPenalty.blockUntil(blockedUntil);
 
         return user.getBlocked();
 
