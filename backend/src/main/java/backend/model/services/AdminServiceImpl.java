@@ -248,20 +248,7 @@ public class AdminServiceImpl implements AdminService {
 
         User userReported = userReportOpt.get().getUserReported();
 
-        inputStream = new FileInputStream("src/main/resources/messages_en.properties");
-        properties.load(inputStream);
-
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-
-        String mailBody = properties.getProperty("project.messages.mail.reportWarningBody");
-        String mailSubject = properties.getProperty("project.messages.mail.reportWarningSubject");
-
-        mailMessage.setFrom(SENDER_EMAIL);
-        mailMessage.setTo(userReported.getEmail());
-        mailMessage.setText(mailBody + "\n\n" + warning);
-        mailMessage.setSubject(mailSubject);
-
-        mailSender.send(mailMessage);
+        sendEmailToWarnUser(userReported.getEmail(), warning);
 
     }
 
@@ -282,20 +269,7 @@ public class AdminServiceImpl implements AdminService {
 
         User userReported = imageReportOpt.get().getImageReported().getUser();
 
-        inputStream = new FileInputStream("src/main/resources/messages_en.properties");
-        properties.load(inputStream);
-
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-
-        String mailBody = properties.getProperty("project.messages.mail.reportWarningBody");
-        String mailSubject = properties.getProperty("project.messages.mail.reportWarningSubject");
-
-        mailMessage.setFrom(SENDER_EMAIL);
-        mailMessage.setTo(userReported.getEmail());
-        mailMessage.setText(mailBody + "\n\n" + warning);
-        mailMessage.setSubject(mailSubject);
-
-        mailSender.send(mailMessage);
+        sendEmailToWarnUser(userReported.getEmail(), warning);
 
     }
 
@@ -683,13 +657,13 @@ public class AdminServiceImpl implements AdminService {
                 if (!userPoints.getPublishedToday() && publicationTime.getHour() == now.getHour() &&
                         publicationTime.getMinute() == now.getMinute()) {
 
-                    sendEmail(user.getEmail());
+                    sendEmailToPublishToday(user.getEmail());
                 }
             }
         }
     }
 
-    private void sendEmail(String to) throws IOException {
+    private void sendEmailToPublishToday(String to) throws IOException {
 
         inputStream = new FileInputStream("src/main/resources/messages_en.properties");
         properties.load(inputStream);
@@ -702,6 +676,25 @@ public class AdminServiceImpl implements AdminService {
         mailMessage.setFrom(SENDER_EMAIL);
         mailMessage.setTo(to);
         mailMessage.setText(mailBody);
+        mailMessage.setSubject(mailSubject);
+
+        mailSender.send(mailMessage);
+
+    }
+
+    private void sendEmailToWarnUser(String to, String warning) throws IOException {
+
+        inputStream = new FileInputStream("src/main/resources/messages_en.properties");
+        properties.load(inputStream);
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+        String mailBody = properties.getProperty("project.messages.mail.reportWarningBody");
+        String mailSubject = properties.getProperty("project.messages.mail.reportWarningSubject");
+
+        mailMessage.setFrom(SENDER_EMAIL);
+        mailMessage.setTo(to);
+        mailMessage.setText(mailBody + "\n\n" + warning);
         mailMessage.setSubject(mailSubject);
 
         mailSender.send(mailMessage);
