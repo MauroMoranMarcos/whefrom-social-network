@@ -290,10 +290,8 @@ public class AdminServiceImpl implements AdminService {
         }
 
         User userReported = userReportOpt.get().getUserReported();
-        UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.silence();
-        userPenalty.silenceUntil(silencedUntil);
+        userReported.silence(silencedUntil);
 
         return userReported.getSilenced();
 
@@ -316,10 +314,8 @@ public class AdminServiceImpl implements AdminService {
         }
 
         User userReported = imageReportOpt.get().getImageReported().getUser();
-        UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.silence();
-        userPenalty.silenceUntil(silencedUntil);
+        userReported.silence(silencedUntil);
 
         return userReported.getSilenced();
 
@@ -342,10 +338,8 @@ public class AdminServiceImpl implements AdminService {
         }
 
         User userReported = userReportOpt.get().getUserReported();
-        UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.block();
-        userPenalty.blockUntil(blockedUntil);
+        userReported.block(blockedUntil);
 
         return userReported.getBlocked();
 
@@ -368,10 +362,8 @@ public class AdminServiceImpl implements AdminService {
         }
 
         User userReported = imageReportOpt.get().getImageReported().getUser();
-        UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.block();
-        userPenalty.blockUntil(blockedUntil);
+        userReported.block(blockedUntil);
 
         return userReported.getBlocked();
 
@@ -499,10 +491,7 @@ public class AdminServiceImpl implements AdminService {
 
         User user = permissionChecker.checkUser(userId);
 
-        UserPenalty userPenalty = user.getUserPenalty();
-
-        user.silence();
-        userPenalty.silenceUntil(silencedUntil);
+        user.silence(silencedUntil);
 
         return user.getSilenced();
 
@@ -519,10 +508,7 @@ public class AdminServiceImpl implements AdminService {
 
         User user = permissionChecker.checkUser(userId);
 
-        UserPenalty userPenalty = user.getUserPenalty();
-
-        user.block();
-        userPenalty.blockUntil(blockedUntil);
+        user.block(blockedUntil);
 
         return user.getBlocked();
 
