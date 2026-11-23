@@ -315,6 +315,7 @@ public class User {
 
     public void unsilence() {
         this.silenced = false;
+        this.userPenalty.resetSilence();
     }
 
     public Boolean getBlocked() {
@@ -332,6 +333,7 @@ public class User {
 
     public void unblock() {
         this.blocked = false;
+        this.userPenalty.resetBlock();
     }
 
     public Boolean getVerified() {
