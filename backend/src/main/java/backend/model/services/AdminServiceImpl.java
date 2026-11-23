@@ -370,7 +370,7 @@ public class AdminServiceImpl implements AdminService {
         User userReported = userReportOpt.get().getUserReported();
         UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.setBlocked(true);
+        userReported.block();
         userPenalty.blockUntil(blockedUntil);
 
         return userReported.getBlocked();
@@ -396,7 +396,7 @@ public class AdminServiceImpl implements AdminService {
         User userReported = imageReportOpt.get().getImageReported().getUser();
         UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.setBlocked(true);
+        userReported.block();
         userPenalty.blockUntil(blockedUntil);
 
         return userReported.getBlocked();
@@ -508,7 +508,7 @@ public class AdminServiceImpl implements AdminService {
         UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
 
         userPenalty.blockUntil(LocalDate.now().minusYears(1));
-        user.setBlocked(false);
+        user.unblock();
 
         return user.getSilenced();
 
@@ -547,7 +547,7 @@ public class AdminServiceImpl implements AdminService {
 
         UserPenalty userPenalty = user.getUserPenalty();
 
-        user.setBlocked(true);
+        user.block();
         userPenalty.blockUntil(blockedUntil);
 
         return user.getBlocked();
