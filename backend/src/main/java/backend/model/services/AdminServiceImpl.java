@@ -592,7 +592,7 @@ public class AdminServiceImpl implements AdminService {
             throw new InstanceNotFoundException("project.entities.verificationRequest", brandId);
         }
 
-        brand.setVerified(true);
+        brand.verify();
 
         VerificationRequest verificationRequest = verificationRequestOpt.get();
         verificationRequestDao.delete(verificationRequest);
@@ -623,7 +623,7 @@ public class AdminServiceImpl implements AdminService {
             throw new InstanceNotFoundException("project.entities.verificationRequest", brandId);
         }
 
-        brand.setVerified(false);
+        brand.unverify();
 
         VerificationRequest verificationRequest = verificationRequestOpt.get();
         verificationRequestDao.delete(verificationRequest);
