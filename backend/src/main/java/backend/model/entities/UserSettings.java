@@ -15,20 +15,16 @@ public class UserSettings {
     public UserSettings() {
     }
 
-    public UserSettings(User user) {
+    public static UserSettings createNew(User user) {
+        return new UserSettings(user);
+    }
+
+    private UserSettings(User user) {
         this.user = user;
         this.privacyPublic = true;
         this.notifyMe = true;
         this.showUplRewardHelp = true;
         this.showUplImageHelp = true;
-    }
-
-    public UserSettings(Long id, Boolean privacyPublic, Boolean notifyMe, Boolean showUplRewardHelp, Boolean showUplImageHelp) {
-        this.id = id;
-        this.privacyPublic = privacyPublic;
-        this.notifyMe = notifyMe;
-        this.showUplRewardHelp = showUplRewardHelp;
-        this.showUplImageHelp = showUplImageHelp;
     }
 
     @Id
