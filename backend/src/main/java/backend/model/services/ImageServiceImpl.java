@@ -112,7 +112,7 @@ public class ImageServiceImpl implements ImageService {
         image.setHidden(false);
 
         imageDao.save(image);
-        userPoints.setPublishedToday(true);
+        userPoints.publishedToday();
 
         return image;
     }

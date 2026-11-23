@@ -662,19 +662,8 @@ public class AdminServiceImpl implements AdminService {
             if (!isAdmin(user.getRole())) {
                 UserPoints userPoints = user.getUserPoints();
 
-                Random random = new Random();
-
-                // Generar una hora aleatoria entre 0 y 23
-                int hour = random.nextInt(24);
-
-                // Generar minutos y segundos aleatorios entre 0 y 59
-                int minute = random.nextInt(60);
-                int second = random.nextInt(60);
-
-                // Crear el LocalDateTime con la fecha actual y la hora generada aleatoriamente
-                userPoints.setPublicationTime(LocalDateTime.of(LocalDate.now(),
-                        java.time.LocalTime.of(hour, minute, second)));
-                userPoints.setPublishedToday(false);
+                userPoints.resetPublicationTime();
+                userPoints.resetPublishedToday();
             }
         }
 
