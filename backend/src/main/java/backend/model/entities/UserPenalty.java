@@ -49,6 +49,10 @@ public class UserPenalty {
         this.silencedUntil = silencedUntil;
     }
 
+    public void resetSilence() {
+        this.silencedUntil = LocalDate.now().minusYears(1);
+    }
+
     public LocalDate getBlockedUntil() {
         return blockedUntil;
     }
@@ -59,6 +63,10 @@ public class UserPenalty {
 
     public void blockUntil(LocalDate blockedUntil) {
         this.blockedUntil = blockedUntil;
+    }
+
+    public void resetBlock() {
+        this.blockedUntil = LocalDate.now().minusYears(1);
     }
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
