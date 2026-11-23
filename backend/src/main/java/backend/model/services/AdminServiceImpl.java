@@ -470,7 +470,7 @@ public class AdminServiceImpl implements AdminService {
 
         user.unblock();
 
-        return user.getSilenced();
+        return user.getBlocked();
 
     }
 
