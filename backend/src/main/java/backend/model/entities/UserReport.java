@@ -68,8 +68,12 @@ public class UserReport {
         return resolved;
     }
 
-    public void setResolved(Boolean resolved) {
+    private void setResolved(Boolean resolved) {
         this.resolved = resolved;
+    }
+
+    public void resolve() {
+        this.resolved = true;
     }
 
     public LocalDateTime getDate() {

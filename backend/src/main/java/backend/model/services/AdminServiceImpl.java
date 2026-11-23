@@ -61,11 +61,7 @@ public class AdminServiceImpl implements AdminService {
             throw new DuplicateInstanceException("project.entities.category", name);
         }
 
-        Category category = new Category(name);
-
-        if (active != null) {
-            category.setActive(active);
-        }
+        Category category = Category.createNew(name, active);
 
         categoryDao.save(category);
 
@@ -108,8 +104,7 @@ public class AdminServiceImpl implements AdminService {
 
         Category category = categoryopt.get();
 
-        category.setName(name);
-        category.setActive(status);
+        category.updateCategory(name, status);
 
         return category;
 
@@ -136,7 +131,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userId);
 
-        if (!admin.getRole().equals(User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -169,7 +164,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -185,7 +180,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -205,7 +200,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -221,7 +216,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -241,7 +236,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -253,20 +248,7 @@ public class AdminServiceImpl implements AdminService {
 
         User userReported = userReportOpt.get().getUserReported();
 
-        inputStream = new FileInputStream("src/main/resources/messages_en.properties");
-        properties.load(inputStream);
-
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-
-        String mailBody = properties.getProperty("project.messages.mail.reportWarningBody");
-        String mailSubject = properties.getProperty("project.messages.mail.reportWarningSubject");
-
-        mailMessage.setFrom(SENDER_EMAIL);
-        mailMessage.setTo(userReported.getEmail());
-        mailMessage.setText(mailBody + "\n\n" + warning);
-        mailMessage.setSubject(mailSubject);
-
-        mailSender.send(mailMessage);
+        sendEmailToWarnUser(userReported.getEmail(), warning);
 
     }
 
@@ -275,7 +257,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -287,20 +269,7 @@ public class AdminServiceImpl implements AdminService {
 
         User userReported = imageReportOpt.get().getImageReported().getUser();
 
-        inputStream = new FileInputStream("src/main/resources/messages_en.properties");
-        properties.load(inputStream);
-
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-
-        String mailBody = properties.getProperty("project.messages.mail.reportWarningBody");
-        String mailSubject = properties.getProperty("project.messages.mail.reportWarningSubject");
-
-        mailMessage.setFrom(SENDER_EMAIL);
-        mailMessage.setTo(userReported.getEmail());
-        mailMessage.setText(mailBody + "\n\n" + warning);
-        mailMessage.setSubject(mailSubject);
-
-        mailSender.send(mailMessage);
+        sendEmailToWarnUser(userReported.getEmail(), warning);
 
     }
 
@@ -310,7 +279,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -321,10 +290,8 @@ public class AdminServiceImpl implements AdminService {
         }
 
         User userReported = userReportOpt.get().getUserReported();
-        UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.setSilenced(true);
-        userPenalty.setSilencedUntil(silencedUntil);
+        userReported.silence(silencedUntil);
 
         return userReported.getSilenced();
 
@@ -336,7 +303,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -347,10 +314,8 @@ public class AdminServiceImpl implements AdminService {
         }
 
         User userReported = imageReportOpt.get().getImageReported().getUser();
-        UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.setSilenced(true);
-        userPenalty.setSilencedUntil(silencedUntil);
+        userReported.silence(silencedUntil);
 
         return userReported.getSilenced();
 
@@ -362,7 +327,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -373,10 +338,8 @@ public class AdminServiceImpl implements AdminService {
         }
 
         User userReported = userReportOpt.get().getUserReported();
-        UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.setBlocked(true);
-        userPenalty.setBlockedUntil(blockedUntil);
+        userReported.block(blockedUntil);
 
         return userReported.getBlocked();
 
@@ -388,7 +351,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -399,10 +362,8 @@ public class AdminServiceImpl implements AdminService {
         }
 
         User userReported = imageReportOpt.get().getImageReported().getUser();
-        UserPenalty userPenalty = userReported.getUserPenalty();
 
-        userReported.setBlocked(true);
-        userPenalty.setBlockedUntil(blockedUntil);
+        userReported.block(blockedUntil);
 
         return userReported.getBlocked();
 
@@ -414,7 +375,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -430,7 +391,7 @@ public class AdminServiceImpl implements AdminService {
             throw new ReportAlreadyResolvedException();
         }
 
-        userReport.setResolved(true);
+        userReport.resolve();
 
         return userReport.getResolved();
 
@@ -441,7 +402,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -457,7 +418,7 @@ public class AdminServiceImpl implements AdminService {
             throw new ReportAlreadyResolvedException();
         }
 
-        imageReport.setResolved(true);
+        imageReport.resolve();
 
         return imageReport.getResolved();
 
@@ -469,7 +430,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -484,16 +445,13 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
         User user = permissionChecker.checkUser(userId);
 
-        UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
-
-        userPenalty.setSilencedUntil(LocalDate.now().minusYears(1));
-        user.setSilenced(false);
+        user.unsilence();
 
         return user.getSilenced();
 
@@ -504,18 +462,15 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
         User user = permissionChecker.checkUser(userId);
 
-        UserPenalty userPenalty = findUserPenaltyByUserId(userLoggedId, userId);
+        user.unblock();
 
-        userPenalty.setBlockedUntil(LocalDate.now().minusYears(1));
-        user.setBlocked(false);
-
-        return user.getSilenced();
+        return user.getBlocked();
 
     }
 
@@ -524,16 +479,13 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
         User user = permissionChecker.checkUser(userId);
 
-        UserPenalty userPenalty = user.getUserPenalty();
-
-        user.setSilenced(true);
-        userPenalty.setSilencedUntil(silencedUntil);
+        user.silence(silencedUntil);
 
         return user.getSilenced();
 
@@ -544,16 +496,13 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
         User user = permissionChecker.checkUser(userId);
 
-        UserPenalty userPenalty = user.getUserPenalty();
-
-        user.setBlocked(true);
-        userPenalty.setBlockedUntil(blockedUntil);
+        user.block(blockedUntil);
 
         return user.getBlocked();
 
@@ -565,7 +514,7 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
@@ -581,13 +530,13 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
         User brand = permissionChecker.checkUser(brandId);
 
-        if (!Objects.equals(brand.getRole(), User.RoleType.BRAND_USER)) {
+        if (!isBrand(brand.getRole())) {
             throw new PermissionException();
         }
 
@@ -597,7 +546,7 @@ public class AdminServiceImpl implements AdminService {
             throw new InstanceNotFoundException("project.entities.verificationRequest", brandId);
         }
 
-        brand.setVerified(true);
+        brand.verify();
 
         VerificationRequest verificationRequest = verificationRequestOpt.get();
         verificationRequestDao.delete(verificationRequest);
@@ -612,13 +561,13 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
         User brand = permissionChecker.checkUser(brandId);
 
-        if (!Objects.equals(brand.getRole(), User.RoleType.BRAND_USER)) {
+        if (!isBrand(brand.getRole())) {
             throw new PermissionException();
         }
 
@@ -628,7 +577,7 @@ public class AdminServiceImpl implements AdminService {
             throw new InstanceNotFoundException("project.entities.verificationRequest", brandId);
         }
 
-        brand.setVerified(false);
+        brand.unverify();
 
         VerificationRequest verificationRequest = verificationRequestOpt.get();
         verificationRequestDao.delete(verificationRequest);
@@ -643,13 +592,13 @@ public class AdminServiceImpl implements AdminService {
 
         User admin = permissionChecker.checkUser(userLoggedId);
 
-        if (!Objects.equals(admin.getRole(), User.RoleType.ADMIN_USER)) {
+        if (!isAdmin(admin.getRole())) {
             throw new PermissionException();
         }
 
         User brand = permissionChecker.checkUser(brandId);
 
-        if (!Objects.equals(brand.getRole(), User.RoleType.BRAND_USER)) {
+        if (!isBrand(brand.getRole())) {
             throw new PermissionException();
         }
 
@@ -664,22 +613,10 @@ public class AdminServiceImpl implements AdminService {
         Iterable<User> users = userDao.findAll();
 
         for (User user : users) {
-            if (user.getRole().equals(User.RoleType.NORMAL_USER) || user.getRole().equals(User.RoleType.BRAND_USER)) {
+            if (!isAdmin(user.getRole())) {
                 UserPoints userPoints = user.getUserPoints();
 
-                Random random = new Random();
-
-                // Generar una hora aleatoria entre 0 y 23
-                int hour = random.nextInt(24);
-
-                // Generar minutos y segundos aleatorios entre 0 y 59
-                int minute = random.nextInt(60);
-                int second = random.nextInt(60);
-
-                // Crear el LocalDateTime con la fecha actual y la hora generada aleatoriamente
-                userPoints.setPublicationTime(LocalDateTime.of(LocalDate.now(),
-                        java.time.LocalTime.of(hour, minute, second)));
-                userPoints.setPublishedToday(false);
+                userPoints.resetPublicationTime();
             }
         }
 
@@ -692,20 +629,24 @@ public class AdminServiceImpl implements AdminService {
 
         for (User user : users) {
             if (user.getUserSettings().getNotifyMe()) {
-                LocalDateTime now = LocalDateTime.now();
                 UserPoints userPoints = user.getUserPoints();
-                LocalDateTime publicationTime = userPoints.getPublicationTime();
 
-                if (!userPoints.getPublishedToday() && publicationTime.getHour() == now.getHour() &&
-                        publicationTime.getMinute() == now.getMinute()) {
-
-                    sendEmail(user.getEmail());
+                if (canUserPublish(userPoints)) {
+                    sendEmailToPublishToday(user.getEmail());
                 }
             }
         }
     }
 
-    private void sendEmail(String to) throws IOException {
+    private boolean canUserPublish(UserPoints userPoints) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime publicationTime = userPoints.getPublicationTime();
+
+        return !userPoints.getPublishedToday() && publicationTime.getHour() == now.getHour() &&
+                publicationTime.getMinute() == now.getMinute();
+    }
+
+    private void sendEmailToPublishToday(String to) throws IOException {
 
         inputStream = new FileInputStream("src/main/resources/messages_en.properties");
         properties.load(inputStream);
@@ -722,6 +663,33 @@ public class AdminServiceImpl implements AdminService {
 
         mailSender.send(mailMessage);
 
+    }
+
+    private void sendEmailToWarnUser(String to, String warning) throws IOException {
+
+        inputStream = new FileInputStream("src/main/resources/messages_en.properties");
+        properties.load(inputStream);
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+        String mailBody = properties.getProperty("project.messages.mail.reportWarningBody");
+        String mailSubject = properties.getProperty("project.messages.mail.reportWarningSubject");
+
+        mailMessage.setFrom(SENDER_EMAIL);
+        mailMessage.setTo(to);
+        mailMessage.setText(mailBody + "\n\n" + warning);
+        mailMessage.setSubject(mailSubject);
+
+        mailSender.send(mailMessage);
+
+    }
+
+    private boolean isAdmin(User.RoleType role) {
+        return Objects.equals(role, User.RoleType.ADMIN_USER);
+    }
+
+    private boolean isBrand(User.RoleType role) {
+        return Objects.equals(role, User.RoleType.BRAND_USER);
     }
 
 }

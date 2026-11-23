@@ -76,7 +76,7 @@ public class ImageServiceTest {
     }
 
     private Category createCategory(String categoryName) {
-        return new Category(categoryName);
+        return Category.createNew(categoryName);
     }
 
     private Tag tagExample(String name, String link, int coordinateX, int coordinateY, Category category, Image image) {
@@ -516,7 +516,7 @@ public class ImageServiceTest {
                 user.getId());
 
         Category category = createCategory("category");
-        category.setActive(false);
+        category.deactivate();
         categoryDao.save(category);
 
         assertThrows(CategoryNotActiveException.class, () ->

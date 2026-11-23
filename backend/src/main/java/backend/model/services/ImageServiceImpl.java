@@ -82,7 +82,7 @@ public class ImageServiceImpl implements ImageService {
         if (userOpt.get().getUserPenalty().getSilencedUntil().isAfter(LocalDate.now())) {
             throw new SilencedException();
         } else {
-            userOpt.get().setSilenced(false);
+            userOpt.get().unsilence();
         }
 
         UserPoints userPoints = userOpt.get().getUserPoints();
@@ -112,7 +112,7 @@ public class ImageServiceImpl implements ImageService {
         image.setHidden(false);
 
         imageDao.save(image);
-        userPoints.setPublishedToday(true);
+        userPoints.publishedToday();
 
         return image;
     }

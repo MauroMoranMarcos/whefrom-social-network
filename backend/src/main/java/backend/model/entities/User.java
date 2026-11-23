@@ -304,24 +304,52 @@ public class User {
         return silenced;
     }
 
-    public void setSilenced(Boolean silenced) {
+    private void setSilenced(Boolean silenced) {
         this.silenced = silenced;
+    }
+
+    public void silence(LocalDate silencedUntil) {
+        this.silenced = true;
+        this.userPenalty.silenceUntil(silencedUntil);
+    }
+
+    public void unsilence() {
+        this.silenced = false;
+        this.userPenalty.resetSilence();
     }
 
     public Boolean getBlocked() {
         return blocked;
     }
 
-    public void setBlocked(Boolean blocked) {
+    private void setBlocked(Boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public void block(LocalDate blockedUntil) {
+        this.blocked = true;
+        this.userPenalty.blockUntil(blockedUntil);
+    }
+
+    public void unblock() {
+        this.blocked = false;
+        this.userPenalty.resetBlock();
     }
 
     public Boolean getVerified() {
         return verified;
     }
 
-    public void setVerified(Boolean verified) {
+    private void setVerified(Boolean verified) {
         this.verified = verified;
+    }
+
+    public void verify() {
+        this.verified = true;
+    }
+
+    public void unverify() {
+        this.verified = false;
     }
 
     public RoleType getRole() {

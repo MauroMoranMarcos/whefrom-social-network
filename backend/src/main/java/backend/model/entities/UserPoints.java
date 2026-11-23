@@ -1,7 +1,9 @@
 package backend.model.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 @Entity
 public class UserPoints {
@@ -59,7 +61,7 @@ public class UserPoints {
         return publicationTime;
     }
 
-    public void setPublicationTime(LocalDateTime publicationTime) {
+    private void setPublicationTime(LocalDateTime publicationTime) {
         this.publicationTime = publicationTime;
     }
 
@@ -67,8 +69,32 @@ public class UserPoints {
         return publishedToday;
     }
 
-    public void setPublishedToday(Boolean publishedToday) {
+    private void setPublishedToday(Boolean publishedToday) {
         this.publishedToday = publishedToday;
+    }
+
+    public void resetPublicationTime() {
+        Random random = new Random();
+
+        // Generar una hora aleatoria entre 0 y 23
+        int hour = random.nextInt(24);
+
+        // Generar minutos y segundos aleatorios entre 0 y 59
+        int minute = random.nextInt(60);
+        int second = random.nextInt(60);
+
+        // Crear el LocalDateTime con la fecha actual y la hora generada aleatoriamente
+        this.publicationTime = LocalDateTime.of(LocalDate.now(),
+                java.time.LocalTime.of(hour, minute, second));
+        this.publishedToday = false;
+    }
+
+    public void resetPublishedToday() {
+        this.publishedToday = false;
+    }
+
+    public void publishedToday() {
+        this.publishedToday = true;
     }
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)

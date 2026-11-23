@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
         if (user.get().getUserPenalty().getBlockedUntil().isAfter(LocalDate.now())) {
             throw new BlockedException();
         } else {
-            user.get().setBlocked(false);
+            user.get().unblock();
         }
 
         return user.get();
