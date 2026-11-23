@@ -308,8 +308,9 @@ public class User {
         this.silenced = silenced;
     }
 
-    public void silence() {
+    public void silence(LocalDate silencedUntil) {
         this.silenced = true;
+        this.userPenalty.silenceUntil(silencedUntil);
     }
 
     public void unsilence() {
@@ -324,8 +325,9 @@ public class User {
         this.blocked = blocked;
     }
 
-    public void block() {
+    public void block(LocalDate blockedUntil) {
         this.blocked = true;
+        this.userPenalty.blockUntil(blockedUntil);
     }
 
     public void unblock() {
