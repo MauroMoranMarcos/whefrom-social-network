@@ -356,7 +356,7 @@ public class UserServiceImpl implements UserService {
 
         UserSettings userSettings = permissionChecker.checkUserSettings(userId);
 
-        User userLogged = permissionChecker.checkUser(userLoggedId);
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         if (userLoggedId != 0 && userLogged.getRole().equals(User.RoleType.ADMIN_USER)) {
             Slice<User> slice = followDao.findFollowersByUserId(userId, dateDesc, page, size);
@@ -395,7 +395,7 @@ public class UserServiceImpl implements UserService {
 
         UserSettings userSettings = permissionChecker.checkUserSettings(userId);
 
-        User userLogged = permissionChecker.checkUser(userLoggedId);
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         if (userLoggedId != 0 && userLogged.getRole().equals(User.RoleType.ADMIN_USER)) {
             Slice<User> slice = followDao.findFollowsByUserId(userId, dateDesc, page, size);
