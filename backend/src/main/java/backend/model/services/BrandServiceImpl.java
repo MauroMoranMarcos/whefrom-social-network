@@ -64,18 +64,11 @@ public class BrandServiceImpl implements BrandService {
             throw new DuplicateInstanceException("project.entities.user", user.getUserName());
         }
 
-        UserSettings userSettings = UserSettings.createNew(user);
-
-        UserPenalty userPenalty = UserPenalty.createNew(user);
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(User.RoleType.BRAND_USER);
-        user.setUserSettings(userSettings);
-        user.setUserPenalty(userPenalty);
+        user.initBrandUser(user, passwordEncoder.encode(user.getPassword()));
 
         userDao.save(user);
-        userSettingsDao.save(userSettings);
-        userPenaltyDao.save(userPenalty);
+        userSettingsDao.save(user.getUserSettings());
+        userPenaltyDao.save(user.getUserPenalty());
 
     }
 
