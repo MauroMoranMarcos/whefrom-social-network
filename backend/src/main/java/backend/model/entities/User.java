@@ -279,6 +279,11 @@ public class User {
         this.password = password;
     }
 
+    public void restorePassword(String password) {
+        this.password = password;
+        this.verificationCode = "";
+    }
+
     public String getName() {
         return name;
     }
