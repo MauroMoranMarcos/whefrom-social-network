@@ -133,15 +133,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addProfilePicture(Long userId, byte[] image) throws InstanceNotFoundException {
 
-        if (!userDao.existsById(userId)) {
+        Optional<User> user = userDao.findById(userId);
+
+        if (!user.isPresent()) {
             throw new InstanceNotFoundException("User id", userId);
         }
 
-        Optional<User> user = userDao.findById(userId);
-
-        if (user.isPresent()) {
-            user.get().updateUser(image);
-        }
+        user.get().updateUser(image);
 
     }
 
