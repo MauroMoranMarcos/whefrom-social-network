@@ -34,13 +34,27 @@ public class User {
     private UserPoints userPoints;
     private UserPenalty userPenalty;
 
-    public User() {}
+    protected User() {}
 
-    public void initUser(UserSettings userSettings, UserPoints userPoints, UserPenalty userPenalty, String password) {
+    public void initNormalUser(User user, String password) {
+        UserSettings userSettings = UserSettings.createNew(user);
+        UserPoints userPoints = UserPoints.createNew(user);
+        UserPenalty userPenalty = UserPenalty.createNew(user);
+
         this.userSettings = userSettings;
         this.userPoints = userPoints;
         this.userPenalty = userPenalty;
         this.password = password;
+    }
+
+    public void initBrandUser(User user, String password) {
+        UserSettings userSettings = UserSettings.createNew(user);
+        UserPenalty userPenalty = UserPenalty.createNew(user);
+
+        this.userSettings = userSettings;
+        this.userPenalty = userPenalty;
+        this.password = password;
+        this.role = User.RoleType.BRAND_USER;
     }
 
     public void updateUser(String firstName, String lastName, String email, String phoneNumber, String about) {
@@ -234,8 +248,6 @@ public class User {
         this.userSettings = userSettings;
         this.userPoints = userPoints;
     }
-
-    //TODO: Add more constructors
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
