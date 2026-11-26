@@ -185,9 +185,7 @@ public class UserServiceImpl implements UserService {
             throw new PermissionException();
         }
 
-        user.changePassword(passwordEncoder.encode(newPassword));
-
-        user.setVerificationCode("");
+        user.restorePassword(passwordEncoder.encode(newPassword));
 
     }
 
