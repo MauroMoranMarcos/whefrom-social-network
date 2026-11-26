@@ -69,10 +69,12 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
-    /*
-    Constructor to create a new object User with all attributes (Normal/Brand User with all info).
-     */
-    public User(String userName, String password, String name, String surname, String about, String email,
+    public static User createNew(String userName, String password, String name, String surname, String about, String email,
+                                 LocalDate birthDate, String phoneNumber, byte[] profilePicture, RoleType role, String verificationCode) {
+        return new User(userName, password, name, surname, about, email, birthDate, phoneNumber, profilePicture, role, verificationCode);
+    }
+
+    private User(String userName, String password, String name, String surname, String about, String email,
                 LocalDate birthDate, String phoneNumber, byte[] profilePicture, RoleType role, String verificationCode) {
         this.userName = userName;
         this.password = password;
@@ -88,165 +90,6 @@ public class User {
         this.blocked = false;
         this.verified = false;
         this.verificationCode = verificationCode;
-    }
-
-    public User(String userName, String password, String name, String surname, String about, String email,
-                LocalDate birthDate, String phoneNumber, byte[] profilePicture, RoleType role) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.about = about;
-        this.email = email;
-        this.birthDate = birthDate;
-        this.phoneNumber = phoneNumber;
-        this.profilePicture = profilePicture;
-        this.role = role;
-        this.silenced = false;
-        this.blocked = false;
-        this.verified = false;
-        this.verificationCode = "";
-    }
-
-    public User(String userName, String password, String name, String email, LocalDate birthDate, RoleType role) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.email = email;
-        this.about = "";
-        this.birthDate = birthDate;
-        this.role = role;
-        this.silenced = false;
-        this.blocked = false;
-        this.verified = false;
-        this.verificationCode = "";
-    }
-
-    public User(String userName, String password, String name, String surname, String email, LocalDate birthDate,
-                RoleType role) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.about = "";
-        this.birthDate = birthDate;
-        this.role = role;
-        this.silenced = false;
-        this.blocked = false;
-        this.verified = false;
-        this.verificationCode = "";
-    }
-
-    public User(String userName, String password, String name, String surname, String about, String email,
-                LocalDate birthDate, RoleType role) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.about = about;
-        this.email = email;
-        this.birthDate = birthDate;
-        this.role = role;
-        this.silenced = false;
-        this.blocked = false;
-        this.verified = false;
-        this.verificationCode = "";
-    }
-
-    public User(String userName, String password, String name, String surname, String about, String email,
-                LocalDate birthDate, byte[] profilePicture, RoleType role) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.about = about;
-        this.email = email;
-        this.birthDate = birthDate;
-        this.profilePicture = profilePicture;
-        this.role = role;
-        this.verificationCode = "";
-    }
-
-    public User(String userName, String password, String email, LocalDate birthDate, RoleType role) {
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.about = "";
-        this.birthDate = birthDate;
-        this.role = role;
-        this.silenced = false;
-        this.blocked = false;
-        this.verified = false;
-        this.verificationCode = "";
-    }
-
-    public User(String userName, String password, String name, String about, String email, String phoneNumber,
-                byte[] profilePicture, Boolean silenced, Boolean blocked, Boolean verified, RoleType role,
-                UserSettings userSettings) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.about = about;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.profilePicture = profilePicture;
-        this.silenced = silenced;
-        this.blocked = blocked;
-        this.verified = verified;
-        this.role = role;
-        this.userSettings = userSettings;
-    }
-
-    public User(String userName, String password, String name, String about, String email, String phoneNumber,
-                byte[] profilePicture, Boolean silenced, Boolean blocked, Boolean verified, RoleType role) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.about = about;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.profilePicture = profilePicture;
-        this.silenced = silenced;
-        this.blocked = blocked;
-        this.verified = verified;
-        this.role = role;
-    }
-
-    public User(String userName, String password, String name, String about, String email, String phoneNumber,
-                byte[] profilePicture, RoleType role) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.about = about;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.profilePicture = profilePicture;
-        this.role = role;
-        this.silenced = false;
-        this.blocked = false;
-        this.verified = false;
-    }
-
-    public User(String userName, String password, String name, String surname, String about, String email,
-                LocalDate birthDate, String phoneNumber, byte[] profilePicture, Boolean silenced, Boolean blocked,
-                Boolean verified, RoleType role, String verificationCode, UserSettings userSettings, UserPoints userPoints) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.about = about;
-        this.email = email;
-        this.birthDate = birthDate;
-        this.phoneNumber = phoneNumber;
-        this.profilePicture = profilePicture;
-        this.silenced = silenced;
-        this.blocked = blocked;
-        this.verified = verified;
-        this.role = role;
-        this.verificationCode = verificationCode;
-        this.userSettings = userSettings;
-        this.userPoints = userPoints;
     }
 
     @Id

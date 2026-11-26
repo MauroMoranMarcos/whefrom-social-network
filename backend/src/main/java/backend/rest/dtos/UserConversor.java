@@ -21,7 +21,7 @@ public class UserConversor {
 
     public final static User toUser(UserDto userDto) {
 
-        return new User(userDto.getUserName(), userDto.getPassword(), userDto.getName(), userDto.getSurname(), userDto.getAbout(),
+        return User.createNew(userDto.getUserName(), userDto.getPassword(), userDto.getName(), userDto.getSurname(), userDto.getAbout(),
                 userDto.getEmail(), userDto.getBirthDate(), userDto.getPhoneNumber(), userDto.getProfilePicture(),
                 Objects.equals(userDto.getRole(), "NORMAL_USER") ? User.RoleType.NORMAL_USER : User.RoleType.BRAND_USER,
                 userDto.getVerificationCode());
