@@ -218,7 +218,7 @@ public class ImageServiceImpl implements ImageService {
 
         Optional<User> userOpt = userDao.findById(userId);
 
-        User brand = new User();
+        User brand = brandId != 0 ? permissionChecker.checkUser(brandId) : null;
 
         if (!userOpt.isPresent()) {
             throw new InstanceNotFoundException("project.entities.user", userId);
@@ -230,10 +230,6 @@ public class ImageServiceImpl implements ImageService {
 
         if (!imageOpt.isPresent()) {
             throw new InstanceNotFoundException("project.entities.image", imageId);
-        }
-
-        if (brandId != 0) {
-            brand = permissionChecker.checkUser(brandId);
         }
 
         if (!Objects.equals(userOpt.get().getId(), imageOpt.get().getUser().getId())) {
@@ -280,7 +276,7 @@ public class ImageServiceImpl implements ImageService {
 
         Optional<Category> categoryOpt = categoryDao.findById(categoryId);
 
-        User brand = new User();
+        User brand = brandId != 0 ? permissionChecker.checkUser(brandId) : null;
 
         if (!tagOptional.isPresent()) {
             throw new InstanceNotFoundException("project.entities.tag", tagId);
@@ -288,10 +284,6 @@ public class ImageServiceImpl implements ImageService {
 
         if (!categoryOpt.isPresent()) {
             throw new InstanceNotFoundException("project.entities.category", categoryId);
-        }
-
-        if (brandId != 0) {
-            brand = permissionChecker.checkUser(brandId);
         }
 
         if (!isValidURL(link)) {
@@ -364,11 +356,7 @@ public class ImageServiceImpl implements ImageService {
             throw new InstanceNotFoundException("project.entities.image", id);
         }
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         if (userLoggedId != 0 && userLogged.getRole().equals(User.RoleType.ADMIN_USER)) {
             return image.get();
@@ -408,11 +396,7 @@ public class ImageServiceImpl implements ImageService {
             throw new InstanceNotFoundException("project.entities.image", id);
         }
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         if (userLoggedId != 0 && userLogged.getRole().equals(User.RoleType.ADMIN_USER)) {
             return tagDao.findByImageId(id);
@@ -448,11 +432,7 @@ public class ImageServiceImpl implements ImageService {
 
         User user = permissionChecker.checkUser(userId);
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         if (userLoggedId != 0 && userLogged.getRole().equals(User.RoleType.ADMIN_USER)) {
             Slice<Image> slice = imageDao.findByUserId(userId, user.equals(userLogged), page, size);
@@ -572,11 +552,7 @@ public class ImageServiceImpl implements ImageService {
 
         User user = permissionChecker.checkUser(userId);
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         if (userLoggedId == 0 && !user.getUserSettings().getPrivacyPublic()) {
 
@@ -649,11 +625,7 @@ public class ImageServiceImpl implements ImageService {
             throw new InstanceNotFoundException("project.entities.image", imageId);
         }
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         if (userLoggedId != 0 && userLogged.getRole().equals(User.RoleType.ADMIN_USER)) {
             Slice<User> slice = imageLikeDao.findUsersThatLikedImage(imageId, dateDesc, page, size);
@@ -827,11 +799,7 @@ public class ImageServiceImpl implements ImageService {
     public Block<Comment> findCommentsFromImage(Long imageId, Long userLoggedId, int page, int size)
             throws InstanceNotFoundException, PermissionException, HiddenImageException {
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         Image image = permissionChecker.checkImage(imageId);
 
@@ -877,11 +845,7 @@ public class ImageServiceImpl implements ImageService {
     public Block<Comment> findAnswersFromComment(Long commentId, Long userLoggedId, int page, int size)
             throws InstanceNotFoundException, PermissionException, HiddenImageException {
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         Optional<Comment> comment = commentDao.findById(commentId);
 
@@ -930,11 +894,7 @@ public class ImageServiceImpl implements ImageService {
     public Long getNumCommentsFromImage(Long imageId, Long userLoggedId)
             throws InstanceNotFoundException, PermissionException {
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         Image image = permissionChecker.checkImage(imageId);
 
@@ -969,11 +929,7 @@ public class ImageServiceImpl implements ImageService {
     public Long getNumAnswersFromComment(Long commentId, Long userLoggedId)
             throws InstanceNotFoundException, PermissionException {
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         Optional<Comment> comment = commentDao.findById(commentId);
 
@@ -1093,11 +1049,7 @@ public class ImageServiceImpl implements ImageService {
 
         User user = permissionChecker.checkUser(userId);
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         if (userLoggedId == 0 && !user.getUserSettings().getPrivacyPublic()) {
 
@@ -1159,11 +1111,7 @@ public class ImageServiceImpl implements ImageService {
 
         User user = tag.get().getImage().getUser();
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         if (userLoggedId != 0 && userLogged.getRole().equals(User.RoleType.ADMIN_USER)) {
             Slice<User> slice = tagLikeDao.findUsersThatLikedTag(tagId, dateDesc, page, size);
@@ -1197,11 +1145,7 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Long getNumTagLikes(Long tagId, Long userLoggedId) throws InstanceNotFoundException, PermissionException {
 
-        User userLogged = new User();
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
 
         Optional<Tag> tag = tagDao.findById(tagId);
 
@@ -1253,7 +1197,7 @@ public class ImageServiceImpl implements ImageService {
     public Block<Image> getFeed(Long userId, int page, int size) throws InstanceNotFoundException, PermissionException,
             HiddenImageException {
 
-        User user = new User();
+        User user = userId != 0 ? permissionChecker.checkUser(userId) : null;
 
         List<Image> allImages = new ArrayList<>();
         List<Category> categories = new ArrayList<>();
@@ -1263,8 +1207,6 @@ public class ImageServiceImpl implements ImageService {
         List<Image> otherImages = new ArrayList<>();
 
         if (userId != 0) {
-
-            user = permissionChecker.checkUser(userId);
 
             // Get followed users
             Block<User> userFollowedBlock = userService.findUserFollowed(userId, userId, true, 0, 100000);
