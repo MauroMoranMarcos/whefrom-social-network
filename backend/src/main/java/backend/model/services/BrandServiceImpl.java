@@ -259,17 +259,9 @@ public class BrandServiceImpl implements BrandService {
                                      int page, int size)
             throws InstanceNotFoundException, PermissionException, HiddenImageException {
 
-        User brand = new User();
-        User userLogged = new User();
+        User brand = brandId != 0 ? permissionChecker.checkUser(brandId) : null;
+        User userLogged = userLoggedId != 0 ? permissionChecker.checkUser(userLoggedId) : null;
         boolean sameBrand = false;
-
-        if (brandId != 0) {
-            brand = permissionChecker.checkUser(brandId);
-        }
-
-        if (userLoggedId != 0) {
-            userLogged = permissionChecker.checkUser(userLoggedId);
-        }
 
         if (brandId != 0 && userLoggedId != 0) {
             sameBrand = brand.equals(userLogged);
