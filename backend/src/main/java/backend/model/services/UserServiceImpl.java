@@ -21,9 +21,6 @@ import java.time.LocalDate;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private final int RANDOM_INIT = 100000;
-    private final int RANDOM_BOUND = 900000;
-
     private final String SENDER_EMAIL = "tfgwhefrom@gmail.com";
 
     private final Long MINIMUM_AGE = 16L;
@@ -192,17 +189,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void sendVerificationCode(String email) throws EmailNotFoundException, IOException {
 
-        Optional<User> user = userDao.findByEmail(email);
+        Optional<User> userOpt = userDao.findByEmail(email);
 
-        Random random = new Random();
-
-        String verificationCode = String.valueOf((RANDOM_INIT + random.nextInt(RANDOM_BOUND)));
-        
-        if (!user.isPresent()) {
+        if (!userOpt.isPresent()) {
             throw new EmailNotFoundException();
         }
 
-        user.get().setVerificationCode(verificationCode);
+        User user = userOpt.get();
+
+        user.establishVerificationCode();
 
         inputStream = new FileInputStream("src/main/resources/messages_en.properties");
         properties.load(inputStream);
@@ -215,7 +210,7 @@ public class UserServiceImpl implements UserService {
 
         mailMessage.setFrom(SENDER_EMAIL);
         mailMessage.setTo(email);
-        mailMessage.setText(mailBody + "\n\n" + verificationCode);
+        mailMessage.setText(mailBody + "\n\n" + user.getVerificationCode());
         mailMessage.setSubject(mailSubject);
 
         mailSender.send(mailMessage);
