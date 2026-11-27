@@ -71,6 +71,11 @@ public class UserServiceTest {
                 LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER, "");
     }
 
+    private User createUser(String userName, String name, String email, String verificationCode) {
+        return User.createNew(userName, "password", name, "surname", "about", email,
+                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER, verificationCode);
+    }
+
     private User createUser(String userName, String name, String about, String email, String phoneNumber) {
         return User.createNew(userName, "password", name, "surname", about, email,
                 LocalDate.now().minusYears(19), phoneNumber, profilePicture, User.RoleType.NORMAL_USER, "");
@@ -207,8 +212,7 @@ public class UserServiceTest {
     public void testRestorePassword() throws InstanceNotFoundException, IncorrectLoginException, PermissionException,
             BlockedException, InvalidBirthDateException, DuplicateInstanceException {
 
-        User user = createUser("user");
-        user.setVerificationCode("123456");
+        User user = createUser("user", "name", "email@e.es", "123456");
         userService.signUp(user);
 
         String oldPassword = user.getPassword();
@@ -224,8 +228,7 @@ public class UserServiceTest {
     @Test
     public void testRestorePasswordWithNonExistentEmail() {
 
-        User user = createUser("user");
-        user.setVerificationCode("123456");
+        User user = createUser("user", "name", "email@e.es", "123456");
 
         String oldPassword = user.getPassword();
         String newPassword = 'X' + oldPassword;
@@ -238,8 +241,7 @@ public class UserServiceTest {
     @Test
     public void testRestorePasswordWithWrongVerificationCode() {
 
-        User user = createUser("user");
-        user.setVerificationCode("123456");
+        User user = createUser("user", "name", "email@e.es", "123456");
 
         userDao.save(user);
 
