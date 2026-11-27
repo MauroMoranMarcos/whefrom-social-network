@@ -9,11 +9,15 @@ import javax.persistence.OneToOne;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Random;
 
 @Entity
 public class User {
 
     public enum RoleType {NORMAL_USER, BRAND_USER, ADMIN_USER};
+
+    private final int RANDOM_INIT = 100000;
+    private final int RANDOM_BOUND = 900000;
 
     private Long id;
     private String userName;
@@ -247,8 +251,13 @@ public class User {
         return verificationCode;
     }
 
-    public void setVerificationCode(String verificationCode) {
+    private void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
+    }
+
+    public void establishVerificationCode() {
+        Random random = new Random();
+        this.verificationCode = String.valueOf((RANDOM_INIT + random.nextInt(RANDOM_BOUND)));
     }
 
     @OneToOne(mappedBy = "user", optional = false, fetch = FetchType.LAZY)
