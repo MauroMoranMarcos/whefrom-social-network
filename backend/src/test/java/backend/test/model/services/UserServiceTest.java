@@ -52,8 +52,28 @@ public class UserServiceTest {
     byte[] profilePicture = new byte[] {0x12, 0x34, 0x56, 0x78};
 
     private User createUser(String userName) {
-        return new User(userName, "password", "name", "surname", "about", "email@email.com",
-                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER);
+        return User.createNew(userName, "password", "name", "surname", "about", "email@email.com",
+                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER, "");
+    }
+
+    private User createUser(String userName, LocalDate birthDate) {
+        return User.createNew(userName, "password", "name", "surname", "about", "email@email.com",
+                birthDate, "111-111-111", profilePicture, User.RoleType.NORMAL_USER, "");
+    }
+
+    private User createUser(String userName, String name) {
+        return User.createNew(userName, "password", name, "surname", "about", "email@email.com",
+                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER, "");
+    }
+
+    private User createUser(String userName, String name, String email) {
+        return User.createNew(userName, "password", name, "surname", "about", email,
+                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER, "");
+    }
+
+    private User createUser(String userName, String name, String about, String email, String phoneNumber) {
+        return User.createNew(userName, "password", name, "surname", about, email,
+                LocalDate.now().minusYears(19), phoneNumber, profilePicture, User.RoleType.NORMAL_USER, "");
     }
 
     @Test
@@ -85,8 +105,7 @@ public class UserServiceTest {
     @Test
     public void testSignUpInvalidBirthDate() {
 
-        User user = createUser("user");
-        user.setBirthDate(LocalDate.now().minusYears(15));
+        User user = createUser("user", LocalDate.now().minusYears(15));
 
         assertThrows(InvalidBirthDateException.class, () -> userService.signUp(user));
 
@@ -163,15 +182,10 @@ public class UserServiceTest {
     public void testUpdateProfile() throws InstanceNotFoundException, DuplicateInstanceException,
             InvalidBirthDateException {
 
-        User user = createUser("user");
+        User user = createUser("user", 'X' + "name", 'X' + "about",
+                'X' + "email@email.com", 'X' + "111-111-111");
 
         userService.signUp(user);
-
-        user.setName('X' + user.getName());
-        user.setSurname('X' + user.getSurname());
-        user.setEmail('X' + user.getEmail());
-        user.setPhoneNumber('X' + user.getPhoneNumber());
-        user.setAbout('X' + user.getAbout());
 
         userService.updateProfile(user.getId(), 'X' + user.getName(), 'X' + user.getSurname(),
                 'X' + user.getEmail(), 'X' + user.getPhoneNumber(),
@@ -242,8 +256,7 @@ public class UserServiceTest {
     public void testSendVerificationCode() throws DuplicateInstanceException, EmailNotFoundException,
             IOException, InvalidBirthDateException {
 
-        User user = createUser("user");
-        user.setEmail("mauro.moranm@gmail.com");
+        User user = createUser("user", "name", "mauro.moranm@gmail.com");
 
         userService.signUp(user);
 
@@ -384,13 +397,10 @@ public class UserServiceTest {
     @Test
     public void testFindUsersByKeywordsSearchingByName() {
 
-        User user1 = createUser("userCrazy22");
-        user1.setName("Mark");
-        User user2 = createUser("jumper88");
-        user2.setName("Mark");
-        User user3 = createUser("mark_evans999");
-        user3.setName("Mark");
-        User user4 = createUser("userName4");
+        User user1 = createUser("userCrazy22", "Mark");
+        User user2 = createUser("jumper88", "Mark");
+        User user3 = createUser("mark_evans999", "Mark");
+        User user4 = createUser("userName4", "Pepe");
 
         userDao.save(user1);
         userDao.save(user2);
@@ -428,19 +438,14 @@ public class UserServiceTest {
     @Test
     public void testFindBrandsByKeywordsSearchingByName() {
 
-        User user1 = createUser("userCrazy22");
-        user1.setName("Mark");
-        User user2 = createUser("jumper88");
-        user2.setName("Mark");
-        User user3 = createUser("mark_evans999");
-        user3.setName("Mark");
-        User user4 = createUser("userName4");
+        User user1 = createUser("userCrazy22", "Mark");
+        User user2 = createUser("jumper88", "Mark");
+        User user3 = createUser("mark_evans999", "Mark");
+        User user4 = createUser("userName4", "Mark");
 
-        User brand1 = createUser("brand_mark");
-        brand1.setName("Mark");
+        User brand1 = createUser("brand_mark", "Mark");
         brand1.setRole(User.RoleType.BRAND_USER);
-        User brand2 = createUser("mark_the_brand");
-        brand2.setName("Mark");
+        User brand2 = createUser("mark_the_brand", "Mark");
         brand2.setRole(User.RoleType.BRAND_USER);
 
         userDao.save(user1);

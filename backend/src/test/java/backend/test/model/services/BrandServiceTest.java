@@ -54,13 +54,13 @@ public class BrandServiceTest {
     byte[] imgFile = new byte[] {0x12, 0x34, 0x56, 0x78};
 
     private User createUser(String userName) {
-        return new User(userName, "password", "brandName", "about", "email@email.com",
-                "111-111-111", profilePicture, User.RoleType.BRAND_USER);
+        return User.createNew(userName, "password", "brandName", "surname", "about", "email@email.com",
+                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.BRAND_USER, "");
     }
 
     private User createNormalUser(String userName) {
-        return new User(userName, "password", "name", "surname", "about", "email@email.com",
-                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER);
+        return User.createNew(userName, "password", "name", "surname", "about", "email@email.com",
+                LocalDate.now().minusYears(20), "111-111-111", profilePicture, User.RoleType.NORMAL_USER, "");
     }
 
     private Reward rewardExample(String name, String description, Long pointsCost, Long stock, byte[] imgFile, Long brandId) {
@@ -1140,7 +1140,6 @@ public class BrandServiceTest {
         userService.signUp(brand2);
         User user = createUser("user");
         user.setRole(User.RoleType.NORMAL_USER);
-        user.setBirthDate(LocalDate.now().minusYears(20));
         userService.signUp(user);
 
         Image image1 = imageService.uploadImage(
@@ -1191,7 +1190,6 @@ public class BrandServiceTest {
 
         User user = createUser("user");
         user.setRole(User.RoleType.NORMAL_USER);
-        user.setBirthDate(LocalDate.now().minusYears(20));
         userService.signUp(user);
 
         assertThrows(InstanceNotFoundException.class, () ->

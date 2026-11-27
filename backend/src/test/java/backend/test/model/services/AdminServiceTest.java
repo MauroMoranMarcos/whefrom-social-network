@@ -61,13 +61,18 @@ public class AdminServiceTest {
     }
 
     private User createAdmin(String userName) {
-        return new User(userName, "password", "admin", "about", "email@email.com",
-                "111-111-111", profilePicture, User.RoleType.ADMIN_USER);
+        return User.createNew(userName, "password", "admin", "admin", "about", "email@email.com",
+                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.ADMIN_USER, "");
     }
 
     private User createUser(String userName) {
-        return new User(userName, "password", "name", "surname", "about", "email@email.com",
-                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER);
+        return User.createNew(userName, "password", "user", "user", "about", "email@email.com",
+                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER, "");
+    }
+
+    private User createUser(String userName, String email) {
+        return User.createNew(userName, "password", "user", "user", "about", email,
+                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER, "");
     }
 
     @Test
@@ -467,8 +472,7 @@ public class AdminServiceTest {
         userService.signUp(admin);
         User user1 = createUser("user1");
         userService.signUp(user1);
-        User user2 = createUser("user2");
-        user2.setEmail("mauro.moranm@gmail.com");
+        User user2 = createUser("user2", "mauro.moranm@gmail.com");
         userService.signUp(user2);
 
         Long userReportId = userService.reportUser(user1.getId(), user2.getId(), "SPAM", "explanation");
@@ -482,8 +486,7 @@ public class AdminServiceTest {
 
         User user1 = createUser("user1");
         userService.signUp(user1);
-        User user2 = createUser("user2");
-        user2.setEmail("mauro.moranm@gmail.com");
+        User user2 = createUser("user2", "mauro.moranm@gmail.com");
         userService.signUp(user2);
 
         Long userReportId = userService.reportUser(user1.getId(), user2.getId(), "SPAM", "explanation");
@@ -514,8 +517,7 @@ public class AdminServiceTest {
         userService.signUp(admin);
         User user1 = createUser("user1");
         userService.signUp(user1);
-        User user2 = createUser("user2");
-        user2.setEmail("mauro.moranm@gmail.com");
+        User user2 = createUser("user2", "mauro.moranm@gmail.com");
         userService.signUp(user2);
 
         Image image = imageService.uploadImage(
@@ -533,8 +535,7 @@ public class AdminServiceTest {
 
         User user1 = createUser("user1");
         userService.signUp(user1);
-        User user2 = createUser("user2");
-        user2.setEmail("mauro.moranm@gmail.com");
+        User user2 = createUser("user2", "mauro.moranm@gmail.com");
         userService.signUp(user2);
 
         Image image = imageService.uploadImage(

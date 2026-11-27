@@ -67,8 +67,8 @@ public class ImageServiceTest {
     byte[] imgFile = new byte[] {0x12, 0x34, 0x56, 0x78};
 
     private User createUser(String userName) {
-        return new User(userName, "password", "name", "surname", "about", "email@email.com",
-                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER);
+        return User.createNew(userName, "password", "name", "surname", "about", "email@email.com",
+                LocalDate.now().minusYears(19), "111-111-111", profilePicture, User.RoleType.NORMAL_USER, "");
     }
 
     private Image imageExample(String title, String description, String location, byte[] imgFile, Long userId) {
